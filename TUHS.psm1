@@ -26,7 +26,14 @@ function Get-SCCMPackage
         [String]
         $PackageID
     )
-    Set-location TUH:
+    If (Get-PSDrive "TUH" -ErrorAction SilentlyContinue)
+    {
+        set-location TUH:
+    }
+    else {
+        Install-SCCM
+        Set-location TUH:
+    }
 
 
     Get-CMPackage -packageID $PackageID -FAST
