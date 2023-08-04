@@ -14,7 +14,7 @@ function Install-SCCM
 {
     Set-Location 'C:\Program Files (x86)\Microsoft Endpoint Manager\AdminConsole\bin'
     Import-Module .\ConfigurationManager.psd1
-    new-PSDrive -Name "SCCM" -PSProvider "CMSite" -root "tssccmmgtprd01.tuhs.prv" -Description "Primary Site"
+    new-PSDrive -Name "TUH" -PSProvider "CMSite" -root "tssccmmgtprd01.tuhs.prv" -Description "Primary Site"
     Update-Help -Module ConfigurationManager
 }
 
@@ -26,27 +26,27 @@ function Get-SCCMPackage
         [String]
         $PackageID
     )
-    Set-location SCCM:
+    Set-location TUH:
 
     try
      {
-        Get-CMPackage $PackageID
+        Get-CMPackage -packageID $PackageID -FAST
     }
     catch 
     {
         try 
         {
-            Get-CMDeploymentPackage $PackageID
+            Get-CMDeploymentPackage -packageID $PackageID
         }
         catch 
         {
             try 
             {
-                Get-CMSoftwareUpdateDeploymentPackage $PackageID
+                Get-CMSoftwareUpdateDeploymentPackage -packageID $PackageID
             }
             catch 
             {
-                Get-CMDriverPackage $PackageID
+                Get-CMDriverPackage -packageID $PackageID
             }
         }
     }
