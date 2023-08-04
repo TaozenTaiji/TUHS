@@ -28,28 +28,11 @@ function Get-SCCMPackage
     )
     Set-location TUH:
 
-    try
-     {
-        Get-CMPackage -packageID $PackageID -FAST
-    }
-    catch 
-    {
-        try 
-        {
-            Get-CMDeploymentPackage -packageID $PackageID
-        }
-        catch 
-        {
-            try 
-            {
-                Get-CMSoftwareUpdateDeploymentPackage -packageID $PackageID
-            }
-            catch 
-            {
-                Get-CMDriverPackage -packageID $PackageID
-            }
-        }
-    }
+
+    Get-CMPackage -packageID $PackageID -FAST
+  #  Get-CMDeploymentPackage -packageID $PackageID
+    Get-CMSoftwareUpdateDeploymentPackage -packageID $PackageID
+    Get-CMDriverPackage -packageID $PackageID -fast
 }
     
     
