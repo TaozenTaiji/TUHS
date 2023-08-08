@@ -40,6 +40,7 @@ function Get-SCCMPackage
   #  Get-CMDeploymentPackage -packageID $PackageID
     Get-CMSoftwareUpdateDeploymentPackage -packageID $PackageID
     Get-CMDriverPackage -packageID $PackageID -fast
+    Get-CMTaskSequence -TaskSequencePackageId $PackageID -Fast
 }
     
     
