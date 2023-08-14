@@ -1,4 +1,8 @@
+# Instead of:
+#"${env:HOMEDRIVE}${env:HOMEPATH}"
 
+# Use the following to reference the user's home/profile directory:
+#[Environment]::GetFolderPath([Environment+SpecialFolder]::UserProfile)
 function Find-ADGroup{
 
 [CmdletBinding()]
@@ -7,7 +11,8 @@ param (
     [String]
     $Search
 )
-    get-adgroup -filter {Name -like "*$Search*"}
+    $filter = '*' + $search + '*'
+    get-adgroup -filter {name -like $filter}
 }
 
 function Install-SCCM
