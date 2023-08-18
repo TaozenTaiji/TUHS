@@ -47,5 +47,22 @@ function Get-SCCMPackage
     Get-CMDriverPackage -packageID $PackageID -fast
     Get-CMTaskSequence -TaskSequencePackageId $PackageID -Fast
 }
-    
-    
+function Add-DeviceToCollection
+{
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [String]
+        $CollectionName,
+        [Parameter()]
+        [String]
+        $DeviceName
+    )
+    set-location TUH:
+    $collectionID = (Get-CMCollection -name $CollectionName).collectionID
+    $resourceID = (Get-CMDevice -name $DeviceName).resourceid
+    add-cmdevicecollectiondirectmembershiprule -collectionid $collectionID -resourceid $resourceID
+
+
+
+}
