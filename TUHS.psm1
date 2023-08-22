@@ -62,7 +62,14 @@ function Add-DeviceToCollection
     $collectionID = (Get-CMCollection -name $CollectionName).collectionID
     $resourceID = (Get-CMDevice -name $DeviceName).resourceid
     add-cmdevicecollectiondirectmembershiprule -collectionid $collectionID -resourceid $resourceID
+}
 
-
-
+Function Get-SCCMDeviceLogs
+{[CmdletBinding()]
+    param (
+        [Parameter()]
+        [String]
+        $DeviceName
+    )
+        Copy-Item -Path \\$DeviceName\C$\Windows\CCM\logs -Destination C:\Temp\$DeviceName\ -recurse
 }
