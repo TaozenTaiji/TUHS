@@ -18,7 +18,7 @@
     # CompatiblePSEditions = @()
     
     # ID used to uniquely identify this module
-    GUID = 'ba8b0b59-03fe-4409-ac65-a8fc5eb96f7f'
+    GUID = '22248ee5-18ae-4187-bad6-c2b670b24ae8'
     
     # Author of this module
     Author = 'Zachary Hilliker'
@@ -27,7 +27,7 @@
     CompanyName = 'Temple Health'
     
     # Copyright statement for this module
-    Copyright = '(c) 2019 Zachary Hilliker. All rights reserved.'
+    Copyright = '(c) 2023 Zachary Hilliker. All rights reserved.'
     
     # Description of the functionality provided by this module
     Description = '
@@ -53,7 +53,7 @@
     # ProcessorArchitecture = ''
     
     # Modules that must be imported into the global environment prior to importing this module
-    #RequiredModules = @('InvokePsExec', 'CredentialManager', 'MSOnline','AZ')
+    #RequiredModules = @('InvokePsExec', 'CredentialManager', )
     
     # Assemblies that must be loaded prior to importing this module
     # RequiredAssemblies = @()
