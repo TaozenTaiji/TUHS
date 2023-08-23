@@ -81,7 +81,7 @@ Function Get-SCCMDeviceLogs
         invoke-command -Session LocalAdmin -ScriptBlock {Copy-Item -Path \\$DeviceName\C$\Windows\CCM\logs -Destination C:\Temp\$DeviceName\ -recurse} 
     }
     else {
-        Copy-Item -Path \\$DeviceName\C$\Windows\CCM\logs -Destination C:\Temp\$DeviceName\ -recurse
+        Copy-Item -Path \\$DeviceName\C$\Windows\CCM\logs -Destination C:\Temp\$DeviceName\ -recurse -Force
     }
     
 }
@@ -94,7 +94,7 @@ Function New-AdminSession
         $DeviceName
     )
  
-        if!(Get-PSSession -Name LocalAdmin)
+        if(!(Get-PSSession -Name LocalAdmin -ErrorAction SilentlyContinue))
         {
         New-pssession -Name LocalAdmin -Credential (Get-StoredCredential -target Admin)
         Enter-PSSession -Name LocalAdmin
