@@ -101,3 +101,6 @@ Function New-AdminSession
         }
       
 }
+
+Function Publish-TUHS
+{Publish-Module -name TUHS -Repository TUHSRepo -verbose}
