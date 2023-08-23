@@ -30,7 +30,7 @@
     Copyright = '(c) 2023 Zachary Hilliker. All rights reserved.'
     
     # Description of the functionality provided by this module
-    Description = '
+    Description = 'Various modules for managing AD, SCCM, and anything else that comes up
 
     '
     
