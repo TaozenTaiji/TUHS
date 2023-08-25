@@ -104,5 +104,5 @@ Function New-AdminSession
 
 Function Publish-TUHS
 {
-    Publish-Module -name TUHS -path "C:\github\tuhs" -Repository TUHSRepo  -verbose 
+    Publish-Module -path "C:\github\tuhs" -Repository TUHSRepo -verbose 
 }
