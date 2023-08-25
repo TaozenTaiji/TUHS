@@ -31,7 +31,7 @@ function Get-SCCMPackage
         [String]
         $PackageID
     )
-    If (Get-PSDrive "TUH" -ErrorAction SilentlyContinue)
+    If (Test-path TUH:)
     {
         set-location TUH:
     }
@@ -58,7 +58,15 @@ function Add-DeviceToCollection
         [String]
         $DeviceName
     )
-    set-location TUH:
+    If (Test-path TUH:)
+    {
+        set-location TUH:
+    }
+    else {
+        Install-SCCM
+        Set-location TUH:
+    }
+    
     $collectionID = (Get-CMCollection -name $CollectionName).collectionID
     $resourceID = (Get-CMDevice -name $DeviceName).resourceid
     add-cmdevicecollectiondirectmembershiprule -collectionid $collectionID -resourceid $resourceID
