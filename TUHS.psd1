@@ -12,7 +12,7 @@
     RootModule = 'TUHS.psm1'
     
     # Version number of this module.
-    ModuleVersion = '1.01'
+    ModuleVersion = '1.2'
     
     # Supported PSEditions
     # CompatiblePSEditions = @()

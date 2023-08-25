@@ -71,7 +71,7 @@ Function Get-SCCMDeviceLogs
         [String]
         $DeviceName
     )
-    if (!(test-path \\$DeviceName\C$\Windows\CCM\logs))
+ <#   if (!(test-path \\$DeviceName\C$\Windows\CCM\logs)) ::::Commented out until fully confident local admin works on all remote ssytems
     {
         if!(Get-PSSession -Name LocalAdmin)
         {
@@ -80,9 +80,9 @@ Function Get-SCCMDeviceLogs
         }
         invoke-command -Session LocalAdmin -ScriptBlock {Copy-Item -Path \\$DeviceName\C$\Windows\CCM\logs -Destination C:\Temp\$DeviceName\ -recurse} 
     }
-    else {
+    else {#>
         Copy-Item -Path \\$DeviceName\C$\Windows\CCM\logs -Destination C:\Temp\$DeviceName\ -recurse -Force
-    }
+#    }
     
 }
 
