@@ -114,3 +114,31 @@ Function Publish-TUHS
 {
     Publish-Module -path "C:\github\tuhs" -Repository TUHSRepo -verbose 
 }
+
+Function Update-GPOPermissions{
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [String]
+        $PolicyName 
+        )
+        if($policyname)
+        {
+            Set-GPPermission -Name $policyname -TargetName "tuh\Group Policy Admins" -TargetType Group -PermissionLevel "GpoEditDeleteModifySecurity"
+            Set-GPPermission -Name $policyname -TargetName "tuh\Group Policy Creator Owners" -TargetType Group -PermissionLevel "GpoEditDeleteModifySecurity"
+            Set-GPPermission -Name $policyname -TargetName "tuhs\Group Policy Creator Owners" -TargetType Group -PermissionLevel "GpoEditDeleteModifySecurity"
+            Set-GPPermission -Name $policyname -TargetName "tuh\$env:username" -TargetType User -PermissionLevel "none"
+        }
+        else 
+        {
+            get-gpo -all | where-object{$_.Owner -like "tuh\$env:username"} | foreach-object
+            {
+                $policyname = $_.DisplayName
+                Set-GPPermission -Name $policyname -TargetName "tuh\Group Policy Admins" -TargetType Group -PermissionLevel "GpoEditDeleteModifySecurity"
+                Set-GPPermission -Name $policyname -TargetName "tuh\Group Policy Creator Owners" -TargetType Group -PermissionLevel "GpoEditDeleteModifySecurity"
+                Set-GPPermission -Name $policyname -TargetName "tuhs\Group Policy Creator Owners" -TargetType Group -PermissionLevel "GpoEditDeleteModifySecurity"
+                Set-GPPermission -Name $policyname -TargetName "tuh\$env:username" -TargetType User -PermissionLevel "none"
+            }
+        }
+}
+
