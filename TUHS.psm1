@@ -190,8 +190,7 @@ Function Update-GPOPermissions{
         }
         else 
         {
-            get-gpo -all | where-object{$_.Owner -like "tuh\$env:username"} | foreach-object
-            {
+            get-gpo -all | where-object{$_.Owner -like "tuh\$env:username"} | foreach-object{
                 $policyname = $_.DisplayName
                 Set-GPPermission -Name $policyname -TargetName "tuh\Group Policy Admins" -TargetType Group -PermissionLevel "GpoEditDeleteModifySecurity"
                 Set-GPPermission -Name $policyname -TargetName "tuh\Group Policy Creator Owners" -TargetType Group -PermissionLevel "GpoEditDeleteModifySecurity"
