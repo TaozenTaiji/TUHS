@@ -114,7 +114,13 @@ Function New-AdminSession
 
 Function Publish-TUHS
 {
+    if(test-path C:\github\tuhs)
+    {
     Publish-Module -path "C:\github\tuhs" -Repository TUHSRepo -verbose 
+    }
+    else {
+        Publish-Module -path "C:\tuhs" -Repository TUHSRepo -verbose
+    }
 }
 
 function New-Shortcut {
