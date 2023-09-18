@@ -208,5 +208,5 @@ Function Set-ScriptSignature {
         $path 
         )
         $cert = Get-ChildItem Cert:\CurrentUser\My -CodeSigningCert
-        Set-AuthenticodeSignature -FilePath $path-Certificate $cert
+        Set-AuthenticodeSignature -FilePath $path -Certificate $cert
 }
