@@ -68,8 +68,10 @@ function Add-DeviceToCollection
     }
     
     $collectionID = (Get-CMCollection -name $CollectionName).collectionID
-    $resourceID = (Get-CMDevice -name $DeviceName).resourceid
+     $resourceID = (Get-CMDevice -name $DeviceName).resourceid
     add-cmdevicecollectiondirectmembershiprule -collectionid $collectionID -resourceid $resourceID
+    Invoke-CMCollectionUpdate -collectionid (Get-CMCollectionDependency -Id $collectionID).CollectionID #updates limiting collection
+    Invoke-CMCollectionUpdate -CollectionId $collectionID #updates collection
 }
 
 Function Get-SCCMDeviceLogs
@@ -112,7 +114,13 @@ Function New-AdminSession
 
 Function Publish-TUHS
 {
+    if(test-path C:\github\tuhs)
+    {
     Publish-Module -path "C:\github\tuhs" -Repository TUHSRepo -verbose 
+    }
+    else {
+        Publish-Module -path "C:\tuhs" -Repository TUHSRepo -verbose
+    }
 }
 
 function New-Shortcut {
