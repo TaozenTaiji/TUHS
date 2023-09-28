@@ -201,6 +201,78 @@ Function Update-GPOPermissions{
         }
 }
 
+Function Set-ScriptSignature {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [String]
+        $path 
+        )
+        $cert = Get-ChildItem Cert:\CurrentUser\My -CodeSigningCert
+        Set-AuthenticodeSignature -FilePath $path -Certificate $cert
+}
+
+Function Get-ImprivataStatus {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [String]
+        $username,
+        [Parameter()]
+        [String]
+        $name,
+        [Parameter()]
+        [String]
+        $computername
+        )
+
+        $groups=""
+        if($name)
+        {
+            if(!($name -like "*, *"))
+            {
+                $splitname = $name.split(" ")
+                $displayname = $splitname[1]+", "+$splitname[0]
+            }
+            else 
+            {
+                $displayname = $name
+            }
+            $users=(Get-AdUser -filter {Displayname -like $displayname}).samaccountname
+        }
+        elseif($computername)
+        {
+        $users=(Get-AdComputer -filter {name -like $computername}).samaccountname
+           $groups = (get-adcomputer -identity $users -Properties memberof).memberof -like "CN=Imprivata*"
+            if($groups)
+            {
+            Write-host "$users is a member of: $groups" 
+          
+            }
+            else {
+                write-host "$users is not a member of any imprivata groups"
+            }
+            break
+        }
+        else {
+            $users = $username
+        }
+
+        
+
+        foreach($user in $users)
+        {
+            $groups = (get-aduser -identity $user -Properties memberof).memberof -like "CN=Imprivata*"
+            if($groups)
+            {
+            Write-host "$user is a member of: $groups" 
+           
+            }
+            else {
+                write-host "$user is not a member of any imprivata groups"
+            }
+        }
+}
 function Convert-PowerShellToBatch
 {
     param
