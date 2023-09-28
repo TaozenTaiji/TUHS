@@ -12,7 +12,7 @@
     RootModule = 'TUHS.psm1'
     
     # Version number of this module.
-    ModuleVersion = '1.1.7'
+    ModuleVersion = '1.1.8'
     
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -72,7 +72,7 @@
     
     # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
     FunctionsToExport = @('Install-SCCM', 'Get-SCCMPackage','Add-DeviceToCollection','Get-SCCMDeviceLogs','New-AdminSession','Publish-TUHS','Update-GPOPermissions','Set-ScriptSignature',
-    'Get-ImprivataStatus')
+    'Get-ImprivataStatus','Convert-PowershellToBatch')
     
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
     CmdletsToExport = ''
