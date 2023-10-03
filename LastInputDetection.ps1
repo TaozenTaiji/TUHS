@@ -1,5 +1,6 @@
 $MaxRunTime = (New-Timespan -minutes 718)
 [int]$requiredIdleTime = 30
+$NetworkSharePath = ""
 Start-transcript -path C:\Temp\LastInput.log
 if(test-path C:\temp\LastInput-Finished.log)
 {
@@ -65,9 +66,9 @@ Write-Host ("Idle for " + $Idle.Days + " days, " + $Idle.Hours + " hours, " + $I
 $idletime = [int]$idle.minutes
 start-sleep 60
 #$timer.Elapsed.minutes #Elapsed Time for error checking in log
-    if($timer.Elapsed.hours -eq $maxruntime.Minutes -and $timer.Elapsed.minutes -ge $MaxRunTime.Minutes)
+    if($timer.Elapsed.hours -eq $maxruntime.Hours -and $timer.Elapsed.minutes -ge $MaxRunTime.Minutes)
     {
-        copy-item C:\temp\LastInput.log -Destination \\tuh\tuhsdfs\Scripting-Files\ScriptLogs\$env:computername\LastInput.log
+        copy-item C:\temp\LastInput.log -Destination $NetworkSharePath\LastInput.log
         Return 1618
     }
 
